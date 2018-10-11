@@ -1,0 +1,24 @@
+class IDLE:
+    pass
+
+class PISTON:
+    def master():
+        def values():
+            encodedChord = uint32_t
+        def events():
+			playFChord
+			playBbChord
+			playD5Chord
+			playAbChord
+			playDbChord
+			playCChord
+			playeChord
+			playaChord
+			playDChord
+			playGChord
+			playAChord
+			playC_InvertedChord
+			playF_InvertedChord
+			retractAll
+			engageMuteBar
+			disengageMuteBar
