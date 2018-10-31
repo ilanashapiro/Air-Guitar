@@ -736,28 +736,35 @@ class GuitarUI(App):
 
 '''add the scenes defined above to the UI and then run the UI'''
 ####################### CHORDS FOR HARDWARE USING THE CURRENT PISTON NUMBERING SYSTEM######################
-#[# of pistons to pass in earlier rows + nth piston in that row (based on the string, 1-6 from low to high E)]
+#[number of pistons to pass in earlier rows + nth piston in that row (based on the string, 1-6 from low to high E)]
+#the following chord array are a copy/reference to the chord arrays defined in the Arduino code. The pistons are controlled by the Arduino.
+#uF = [1, 3, 3, -1, -1, -1] #stepper position 1
 F = [0, 0, 0, 0, 0, 1,   #stepper position 1
     0, 0, 0, 0, 0, 0,
     0, 0, 0, 1, 1, 0]
 
-Bb = [1, 1, 0, 0, 0, 1,     #stepper position 1
-      0, 0, 1, 0, 0, 0,
-      0, 0, 0, 1, 1, 0]
-
-D5 = [0, 0, 0, 0, 0, 0,  #perfect 5th, stepper position 1
-    0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0]
-
-Ab = [1, 1, 0, 0, 0, 1,  #stepper position 3
-    0, 0, 1, 0, 0, 0,
-    0, 0, 0, 1, 1, 0]
-
-
-Db = [1, 0, 0, 0, 1, 1, #stepper position 3
+#uBb = [1, 1, 3, 3, 3, 1]#stepper position 1
+Bb = [1, 0, 0, 0, 1, 1,
       0, 0, 0, 0, 0, 0,
       0, 1, 1, 1, 0, 0]
 
+
+#uD5 = [-1, 0, 0, -1, -1, -1] #perfect 5th, stepper position 1
+D5 = [0, 0, 0, 0, 0, 0,   #perfect 5th, stepper position 1
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0]
+
+#uAb = [4, 6, 6, -1, -1, -1]
+Ab = [0, 0, 0, 0, 0, 1,  #stepper position 3
+    0, 0, 0, 0, 0, 0,
+    0, 0, 0, 1, 1, 0]
+
+#uDb = [-1, 4, 6, 6, -1, -1]#stepper position 3
+Db = [0, 0, 0, 0, 1, 0, #stepper position 3
+      0, 0, 0, 0, 0, 0,
+      0, 0, 1, 1, 0, 0]
+
+#uC = [-1, 3, 5, 5, -1, -1] # stepper position 2
 C = [0, 0, 0, 0, 1, 0, #stepper position 2
     0, 0, 0, 0, 0, 0,
     0, 0, 1, 1, 0, 0]
@@ -767,33 +774,39 @@ e = [0, 0, 0, 0, 0, 0,
     0, 0, 0, 1, 1, 0,
     0, 0, 0, 0, 0, 0]
 
-a = [0, 0, 0, 0, 0, 1,  #stepper position 4
+#ua = [5, 7, 7, -1, -1, -1] # stepper position 4
+a = [0, 0, 0, 0, 0, 1,  #stepper position 3
     0, 0, 0, 0, 0, 0,
     0, 0, 0, 1, 1, 0]
 
-D = [0, 0, 0, 0, 0, 0,    # stepper position 1
+#uD = [-1, -1, -1, 2, 3, 2] # stepper position 1
+D = [0, 0, 0, 0, 0, 0,
     1, 0, 1, 0, 0, 0,
     0, 1, 0, 0, 0, 0]
 
-G = [0, 0, 0, 0, 0, 0,     # stepper position 1
+#uG = [3, 2, -1, -1, -1, 3] # stepper position 1
+G = [0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 1, 0,
     1, 0, 0, 0, 0, 1]
 
-
-A = [0, 0, 0, 0, 0, 0,      # stepper position 1
+#uA = [-1, -1, 2, 2, 2, -1] # stepper position 1
+A = [0, 0, 0, 0, 0, 0,
     0, 1, 1, 1, 0, 0,
     0, 0, 0, 0, 0, 0]
 
-C_Inverted = [0, 1, 0, 0, 0, 0,    # stepper position 1
-              0, 0, 0, 1, 0, 0,
-              0, 0, 0, 0, 1, 1]
-
-F_Inverted = [1, 1, 0, 0, 0, 1,    # stepper position 1
+#uC = [-1, 3, 3, 2, 1, -1] # stepper position 1
+C_Inverted = [0, 1, 0, 0, 0, 0,
               0, 0, 1, 0, 0, 0,
               0, 0, 0, 1, 1, 0]
 
+#uFinverted = [1, 3, -1, 2, -1, 1] # stepper position 1
+F_Inverted = [1, 0, 0, 0, 0, 1,
+              0, 0, 1, 0, 0, 0,
+              0, 0, 0, 0, 1, 0]
 
-#SOFTWARE CHORDS-- what should light up
+
+
+#SOFTWARE CHORDS-- what should light up. these arrays dictate which strings should light up on guitar tab graphic in the UI when the corresponding chord gets played on the guitar
 none = [-1, -1, -1, -1, -1, -1]
 uF = [1, 3, 3, -1, -1, -1] #stepper position 1
 uBb = [1, 3, 3, 2, 1, 1]#stepper position 1
@@ -811,7 +824,6 @@ uFinverted = [1, 3, 3, 2, 1, 1] # stepper position 1
 
 uCsing = [-1, -1, -1, 5, -1, -1]
 uFsing = [-1, -1, -1, -1, 6, -1]
-
 
 
 #(beatLength, tonality chord array, fret stepper position, name of hardware chord for manager event above, rest or play)
